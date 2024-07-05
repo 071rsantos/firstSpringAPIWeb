@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import dio.my_first_web_api.handler.BusinessException;
 import dio.my_first_web_api.model.Usuario;
 
 @Repository
 public class UserRepository {
     public void save(Usuario usuario){
+        if(usuario.getLogin()==null) throw new BusinessException("O login é obrigatorio");
+        if(usuario.getPassword()==null)throw new BusinessException("A Senha é obrigatória");
         if (usuario.getId()==null) {
             System.out.println("SAVE - Recebendo novo usuario na camada repositorio.");
         } else{
